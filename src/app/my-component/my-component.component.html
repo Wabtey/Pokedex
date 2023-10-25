@@ -1,14 +1,25 @@
 <input [(ngModel)]="id">
-<p>my-component works!</p>
-your input: {{id}}
+<p>
+    your input: {{id}}
+</p>
+
 <p>
     The input below is supposed to be readonly.
     But you can modify it with the first input bar.
 </p>
 <input [(ngModel)]="id" readonly>
 
+<p>
+    Result:
+</p>
+
+<select name="Pokemon List" [(ngModel)]="id" >
+    <option *ngFor="let item of pokemonMap|keyvalue" [ngValue]="item.value">{{ item.value[0] }}</option>
+</select>
+
+
 <ul>
-  <li *ngFor="let item of pokemonMap|keyvalue">
-    {{ item.key }} : {{ item.value[0] }}
-  </li>
+    <li *ngFor="let item of pokemonMap|keyvalue">
+        {{ item.key }} : {{ item.value[0] }}
+    </li>
 </ul>
