@@ -6,3 +6,9 @@ your input: {{id}}
     But you can modify it with the first input bar.
 </p>
 <input [(ngModel)]="id" readonly>
+
+<ul>
+  <li *ngFor="let item of pokemonMap|keyvalue">
+    {{ item.key }} : {{ item.value[0] }}
+  </li>
+</ul>
