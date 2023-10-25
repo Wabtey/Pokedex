@@ -1,3 +1,8 @@
 <input [(ngModel)]="id">
 <p>my-component works!</p>
-{{id}}
+your input: {{id}}
+<p>
+    The input below is supposed to be readonly.
+    But you can modify it with the first input bar.
+</p>
+<input [(ngModel)]="id" readonly>
