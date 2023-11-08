@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PokemonType } from '../pokemon';
+import { PokeApiService } from '../poke-api.service';
 
 @Component({
   selector: 'app-poke-search',
   templateUrl: './poke-search.component.html',
   styleUrls: ['./poke-search.component.css']
 })
-export class PokeSearchComponent {
+export class PokeSearchComponent implements OnInit {
     id: string = '';
     selectedPokeId: string = '';
 
@@ -26,6 +27,12 @@ export class PokeSearchComponent {
         53 : ['Persian', PokemonType.Normal, [PokemonType.Fighting], false],
         54 : ['Psyduck', PokemonType.Water, [PokemonType.Grass, PokemonType.Electric], false],
         55 : ['Goldduck', PokemonType.Water, [PokemonType.Grass, PokemonType.Electric], false]
+    }
+
+    constructor(private pokeService: PokeApiService) {}
+
+    ngOnInit(): void {
+        this.pokeService.getPokemon();
     }
 
     go() {
