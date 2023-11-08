@@ -25,15 +25,18 @@
     -- Result --
 </p>
 
+<!-- TODO: Sort Result by id -->
+<!-- TODO: feature - display sort option -->
+
 <li *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:selectedPokeId">
-    {{ item.key }} : {{ item.value }}
+    {{ item.key }} : {{ item.value.name }}, {{ item.value.type }}, {{ item.value.weaknessese }}, 
 </li>
 
 <!--
 <p>--- The whole list ---</p>
 
 <li *ngFor="let item of pokemonMap|keyvalue">
-    {{ item.key }} : {{ item.value[0] }}
+    {{ item.key }} : {{ item.value.name }}
 </li>
 -->
 

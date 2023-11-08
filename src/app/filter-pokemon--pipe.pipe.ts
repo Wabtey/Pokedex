@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterPokemonPipe'
+    name: 'filterPokemonPipe'
 })
 export class FilterPokemonPipePipe implements PipeTransform {
 
@@ -19,11 +19,11 @@ export class FilterPokemonPipePipe implements PipeTransform {
             } else {
                 return value.filter(
                     (e) => {
-                        return e.value[0].toLowerCase().includes(searchString.toLowerCase())
+                        return e.value.name.toLowerCase().includes(searchString.toLowerCase())
                     }
                 );
             }
-            
+
         } else {
             return [];
         }
