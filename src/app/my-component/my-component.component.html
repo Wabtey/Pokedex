@@ -1,4 +1,9 @@
+<p>
+    Search for a Pokémon by name or using their National Pokédex number. 
+</p>
+
 <input [(ngModel)]="id">
+<!--
 <p>
     your input: {{id}}
 </p>
@@ -8,18 +13,19 @@
     But you can modify it with the first input bar.
 </p>
 <input [(ngModel)]="id" readonly>
+-->
 
 <p>
-    Result:
+    -- Result --
 </p>
 
-<select name="Pokemon List" [(ngModel)]="id" >
-    <option *ngFor="let item of pokemonMap|keyvalue">{{ item.value[0] }}</option>
+<select name="Pokemon List" [(ngModel)]="id">
+    <option *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:id">{{ item.value[0] }}</option>
 </select>
 
+<p>The whole list</p>
 
-<ul>
-    <li *ngFor="let item of pokemonMap|keyvalue">
-        {{ item.key }} : {{ item.value[0] }}
-    </li>
-</ul>
+<li *ngFor="let item of pokemonMap|keyvalue">
+    {{ item.key }} : {{ item.value[0] }}
+</li>
+
