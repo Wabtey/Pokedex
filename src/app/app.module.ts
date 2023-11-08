@@ -7,6 +7,9 @@ import { PokeSearchComponent } from './poke-search/poke-search.component';
 
 import { FormsModule } from '@angular/forms';
 import { FilterPokemonPipePipe } from './filter-pokemon--pipe.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';  
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { FilterPokemonPipePipe } from './filter-pokemon--pipe.pipe';
   imports: [
     FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
