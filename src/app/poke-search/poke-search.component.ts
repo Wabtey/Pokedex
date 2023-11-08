@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { PokemonType } from '../pokemon';
 
 @Component({
-  selector: 'app-my-component',
-  templateUrl: './my-component.component.html',
-  styleUrls: ['./my-component.component.css']
+  selector: 'app-poke-search',
+  templateUrl: './poke-search.component.html',
+  styleUrls: ['./poke-search.component.css']
 })
-export class MyComponentComponent {
+export class PokeSearchComponent {
     id: string = '';
     selectedPokeId: string = '';
 
@@ -31,23 +31,6 @@ export class MyComponentComponent {
     go() {
         this.selectedPokeId = this.id
     }
-
-    // pokeSearch(value: any[], searchString: string): any {
-    //     // if the search contains a number
-    //     if (!Number.isNaN(parseInt(searchString))) {
-    //         return value.filter(
-    //             (e) => {
-    //                 return e.key.includes(parseInt(searchString))
-    //             }
-    //         );
-    //     } else {
-    //         return value.filter(
-    //             (e) => {
-    //                 return e.value[0].toLowerCase().includes(searchString.toLowerCase())
-    //             }
-    //         );
-    //     }
-    // }
 }
 
 
