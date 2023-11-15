@@ -43,7 +43,7 @@ export class PokeSearchComponent implements OnInit {
             console.log(data)
             data.results.forEach((element: any, index: number) => {
                 this.pokemonMap[index] =
-                    new Pokemon(index, element.name, PokemonType.Water, [], element.url)
+                    new Pokemon(index + 1, element.name, PokemonType.Water, [], element.url)
             });
         });
     }
