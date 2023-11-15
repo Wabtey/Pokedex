@@ -10,23 +10,26 @@ import { FormsModule } from '@angular/forms';
 import { FilterPokemonPipePipe } from './filter-pokemon--pipe.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';  
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { PokeApiService } from './poke-api.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PokeSearchComponent,
-    FilterPokemonPipePipe
-  ],
-  imports: [
-    FormsModule,
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSlideToggleModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        PokeSearchComponent,
+        FilterPokemonPipePipe
+    ],
+    imports: [
+        FormsModule,
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSlideToggleModule
+    ],
+    providers: [
+        // PokeApiService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

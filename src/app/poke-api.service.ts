@@ -10,6 +10,6 @@ export class PokeApiService {
 
     constructor(private http: HttpClient) { }
     getPokemon(): Observable<PokeServiceRes> {
-        return this.http.get<PokeServiceRes>('https://pokeapi.co/api/v2/pokemon/');
+        return this.http.get<PokeServiceRes>('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0/');
     }
 }

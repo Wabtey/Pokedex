@@ -20,6 +20,11 @@ export class PokeSearchComponent implements OnInit {
      *   weaknesses
      * ]
      */
+    pokemonMap: Record<number, Pokemon> = {}
+
+    // Example: 
+    /*
+    ```ts
     pokemonMap: Record<number, Pokemon> = {
         50: new Pokemon(50, 'Diglett', PokemonType.Ground, [PokemonType.Water, PokemonType.Grass, PokemonType.Ice], ''),
         51: new Pokemon(51, 'Dugtrio', PokemonType.Ground, [PokemonType.Water, PokemonType.Grass, PokemonType.Ice], ''),
@@ -28,6 +33,8 @@ export class PokeSearchComponent implements OnInit {
         54: new Pokemon(54, 'Psyduck', PokemonType.Water, [PokemonType.Grass, PokemonType.Electric], ''),
         55: new Pokemon(55, 'Goldduck', PokemonType.Water, [PokemonType.Grass, PokemonType.Electric], '')
     }
+    ```
+    */
 
     constructor(private pokeService: PokeApiService) { }
 
