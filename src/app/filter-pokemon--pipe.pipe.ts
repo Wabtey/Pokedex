@@ -5,6 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPokemonPipePipe implements PipeTransform {
 
+    /**
+     * 
+     * @param value pokemons list
+     * @param searchString user input
+     * @returns the list of filtered pokemons
+     */
     transform(value: any[], searchString?: string): any {
         if (typeof value !== 'undefined' && typeof searchString === 'undefined') {
             return value;

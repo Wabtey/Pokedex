@@ -5,27 +5,76 @@ export interface PokeServiceRes {
     results: IPokemon[];
 }
 
+/**
+ * XXX: shared type for two things kinda different (`PokeServiceRes.results` and `PokemonRes.types[x].type`)
+ * DOC: rename it in NameUrl ? 
+ */
 export interface IPokemon {
     name: string;
     url: string;
 }
 
+/**
+ * `any` as type for now...
+ */
+export interface PokemonRes {
+    abilities: any[];
+    base_experience: number;
+    form: any[];
+    game_indices: any[];
+    height: number;
+    held_items: any[];
+    id: number;
+    is_default: boolean;
+    location_area_encounters: string;
+    moves: any[];
+    name: string;
+    order: number;
+    past_abilities: any[];
+    past_type: any[];
+    species: any[];
+    // TODO: display `official-artwork`
+    sprites: any[];
+    // TODO: display `stats`
+    stats: any[];
+    // TODO: display `type`
+    types: PokemonTypeFromAPI[];
+    weight: number;
+}
+
+export interface PokemonTypeFromAPI {
+    slot: number;
+    type: IPokemon;
+}
+
 // from [pokedex](https://www.pokemon.com/us/pokedex/)
 export enum PokemonType {
-    Water,
-    Fire,
-    Ice,
-    Electric,
-    Ground,
-    Grass,
-    Normal,
-    Fighting,
+    water,
+    fire,
+    ice,
+    electric,
+    ground,
+    rock,
+    grass,
+    normal,
+    fighting,
+    flying,
+    poison,
+    bug,
+    ghost,
+    steel,
+    psychic,
+    fairy,
+    shadow,
+    unknown,
 }
+
+export var default_pokemon_type = PokemonType.unknown;
 
 export class Pokemon {
     // type PokeDex = { 
     //     [name: string]: [string, boolean]; 
     // }
-    constructor(public id: number, public name: string, public type: PokemonType, public weaknesses: PokemonType[], public url: string) {
+    constructor(public id: number, public name: string, public types: PokemonType[], public weaknesses: PokemonType[], public url: string) {
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pokemon, PokemonType } from '../pokemon';
+import { IPokemon, Pokemon, PokemonType, PokemonTypeFromAPI } from '../pokemon';
 import { PokeApiService } from '../poke-api.service';
 
 @Component({
@@ -39,11 +39,23 @@ export class PokeSearchComponent implements OnInit {
     constructor(private pokeService: PokeApiService) { }
 
     ngOnInit(): void {
-        this.pokeService.getPokemon().subscribe((data) => {
-            console.log(data)
+        // IDEA: dig the API's docs to find if we can query directly all the pokemon with specific resource (types, weaknesses, etc)
+        this.pokeService.getAllPokemons().subscribe((data) => {
+            // console.log(data)
             data.results.forEach((element: any, index: number) => {
-                this.pokemonMap[index] =
-                    new Pokemon(index + 1, element.name, PokemonType.Water, [], element.url)
+
+                var pokemon_types: PokemonType[] = [];
+                this.pokeService.getPokemon(index + 1).subscribe((pokemon_resource) => {
+                    pokemon_resource.types.forEach((types_element: PokemonTypeFromAPI, _) => {
+                        // console.log(types_element.type.name);
+                        // console.log(PokemonType[types_element.type.name as keyof typeof PokemonType]);
+                        pokemon_types.push(PokemonType[types_element.type.name as keyof typeof PokemonType])
+                    })
+                });
+
+                var pokemonName = element.name.replace(/^\w/, (c: string) => c.toUpperCase());
+                this.pokemonMap[index + 1] =
+                    new Pokemon(index + 1, pokemonName, pokemon_types, [], element.url)
             });
         });
     }

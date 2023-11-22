@@ -6,7 +6,7 @@
 <button (click)="go()">GO!</button>
 
 <select name="Pokemon List" [(ngModel)]="id">
-    <option *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:id">{{ item.value[0] }}</option>
+    <option *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:id">{{ item.value.name }}</option>
 </select>
 
 <!--
@@ -25,11 +25,12 @@
     -- Result --
 </p>
 
-<!-- TODO: Sort Result by id -->
+<!-- TODO: Sort Result by id .sort((a, b) => a.key - b.key) -->
 <!-- TODO: feature - display sort option -->
 
-<li *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:selectedPokeId">
-    {{ item.key }} : {{ item.value.name }}, {{ item.value.type }}, {{ item.value.weaknessese }}, 
+<li *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:selectedPokeId; item">
+    <!-- TODO: for each `item.value.types` -->
+    {{ item.key }} : {{ item.value.name }}, [{{ item.value.types }}], [{{ item.value.weaknessese }}], 
 </li>
 
 <!--
