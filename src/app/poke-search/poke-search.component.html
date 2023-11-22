@@ -26,19 +26,8 @@
     -- Result --
 </p>
 
-<!-- TODO: Sort Result by id .sort((a, b) => a.key - b.key) -->
 <!-- TODO: feature - display sort option -->
 
 <li *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:selectedPokeId|sortPokemonById">
-    <!-- TODO: for each `item.value.types` -->
     {{ item.key }} : {{ item.value.name }}, [{{ item.value.types }}], [{{ item.value.weaknessese }}], 
 </li>
-
-<!--
-<p>--- The whole list ---</p>
-
-<li *ngFor="let item of pokemonMap|keyvalue">
-    {{ item.key }} : {{ item.value.name }}
-</li>
--->
-
