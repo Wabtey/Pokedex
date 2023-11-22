@@ -38,6 +38,8 @@ export class PokeSearchComponent implements OnInit {
 
     constructor(private pokeService: PokeApiService) { }
 
+    // FIXME: On the first Init, the type are not initiliazed. (we must refresh the list to see them...)
+
     ngOnInit(): void {
         // IDEA: dig the API's docs to find if we can query directly all the pokemon with specific resource (types, weaknesses, etc)
         this.pokeService.getAllPokemons().subscribe((data) => {
