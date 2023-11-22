@@ -65,6 +65,11 @@ export class PokeSearchComponent implements OnInit {
     go() {
         this.selectedPokeId = this.id
     }
+
+    clear() {
+        this.id = ""
+        this.go()
+    }
 }
 
 

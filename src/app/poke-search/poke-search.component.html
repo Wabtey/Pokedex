@@ -4,6 +4,7 @@
 
 <input [(ngModel)]="id">
 <button (click)="go()">GO!</button>
+<button (click)="clear()">Clear</button>
 
 <select name="Pokemon List" [(ngModel)]="id">
     <option *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:id">{{ item.value.name }}</option>
