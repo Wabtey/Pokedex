@@ -12,12 +12,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PokeApiService } from './poke-api.service';
+import { SortPokemonByNamePipe } from './sort-pokemon-by-name.pipe';
+import { SortPokemonByIdPipe } from './sort-pokemon-by-id.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         PokeSearchComponent,
-        FilterPokemonPipePipe
+        FilterPokemonPipePipe,
+        SortPokemonByNamePipe,
+        SortPokemonByIdPipe
     ],
     imports: [
         FormsModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IPokemon, Pokemon, PokemonType, PokemonTypeFromAPI } from '../pokemon';
+import { IPokemon, Pokemon, PokemonType, PokemonTypeFromAPI, default_pokemon_type } from '../pokemon';
 import { PokeApiService } from '../poke-api.service';
 
 @Component({
@@ -15,9 +15,11 @@ export class PokeSearchComponent implements OnInit {
     /**
      * the key is their id -> value:
      * [
+     *   id,
      *   name,
-     *   type,
-     *   weaknesses
+     *   types,
+     *   weaknesses,
+     *   api url to query the pokemon,
      * ]
      */
     pokemonMap: Record<number, Pokemon> = {}
@@ -47,13 +49,20 @@ export class PokeSearchComponent implements OnInit {
             data.results.forEach((element: any, index: number) => {
 
                 var pokemon_types: PokemonType[] = [];
-                this.pokeService.getPokemon(index + 1).subscribe((pokemon_resource) => {
-                    pokemon_resource.types.forEach((types_element: PokemonTypeFromAPI, _) => {
-                        // console.log(types_element.type.name);
-                        // console.log(PokemonType[types_element.type.name as keyof typeof PokemonType]);
-                        pokemon_types.push(PokemonType[types_element.type.name as keyof typeof PokemonType])
-                    })
-                });
+                // this.pokeService.getPokemon(index + 1).subscribe((pokemon_resource) => {
+                //     pokemon_resource.types.forEach((types_element: PokemonTypeFromAPI, _) => {
+                //         // console.log(types_element.type.name);
+                //         // console.log(PokemonType[types_element.type.name as keyof typeof PokemonType]);
+                //         pokemon_types.push(PokemonType[types_element.type.name as keyof typeof PokemonType])
+                //     })
+                // });
+
+                if (index + 1 == 1) {
+                    console.log(element.url)
+                }
+
+                // DEBUG: default type
+                pokemon_types.push(default_pokemon_type)
 
                 var pokemonName = element.name.replace(/^\w/, (c: string) => c.toUpperCase());
                 this.pokemonMap[index + 1] =
