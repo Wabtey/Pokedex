@@ -15,11 +15,11 @@ export class PokeApiService {
 
     /**
      * 
-     * @param pokemon_index: the ingame pokedex official national number
+     * @param pokemon_url: the pokemon url (gave by the api)
      * @returns the Resource for the pokemon with pokemon_index as National Pokédex Number
      */
-    getPokemon(pokemon_index: number): Observable<PokemonRes> {
-        return this.http.get<PokemonRes>('https://pokeapi.co/api/v2/pokemon/' + pokemon_index);
+    getPokemon(pokemon_url: string): Observable<PokemonRes> {
+        return this.http.get<PokemonRes>(pokemon_url);
     }
 
 }
