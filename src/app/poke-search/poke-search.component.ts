@@ -9,7 +9,7 @@ import { PokeApiService } from '../poke-api.service';
     providers: [PokeApiService]
 })
 export class PokeSearchComponent implements OnInit {
-    id: string = '';
+    $id: string = '';
     selectedPokeId: string = '';
 
     /**
@@ -40,34 +40,41 @@ export class PokeSearchComponent implements OnInit {
 
     constructor(private pokeService: PokeApiService) { }
 
-    // FIXME: On the first Init, the type are not initiliazed. (we must refresh the list to see them...)
+    // FIXME: On the first Init, the type are not shown. (we must refresh the list to see them...)
 
     ngOnInit(): void {
+        console.log("Init!")
         // IDEA: dig the API's docs to find if we can query directly all the pokemon with specific resource (types, weaknesses, etc)
         this.pokeService.getAllPokemons().subscribe((data) => {
             // console.log(data)
             data.results.forEach((element: any, index: number) => {
 
+                var pokemon_index: number = index + 1;
                 var pokemon_types: PokemonType[] = [];
                 this.pokeService.getPokemon(element.url).subscribe((pokemon_resource) => {
+                    // if (index + 1 == 1195) {
+                    //     console.log(pokemon_resource)
+                    // }
+                    // pokemon_index = pokemon_resource.id;
+
                     pokemon_resource.types.forEach((types_element: PokemonTypeFromAPI, _) => {
                         pokemon_types.push(PokemonType[types_element.type.name as keyof typeof PokemonType])
                     })
                 });
 
                 var pokemonName = element.name.replace(/^\w/, (c: string) => c.toUpperCase());
-                this.pokemonMap[index + 1] =
-                    new Pokemon(index + 1, pokemonName, pokemon_types, [], element.url)
+                this.pokemonMap[pokemon_index] =
+                    new Pokemon(pokemon_index, pokemonName, pokemon_types, [], element.url)
             });
         });
     }
 
     go() {
-        this.selectedPokeId = this.id
+        this.selectedPokeId = this.$id
     }
 
     clear() {
-        this.id = ""
+        this.$id = ""
         this.go()
     }
 }
