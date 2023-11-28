@@ -44,6 +44,10 @@ export class PokeSearchComponent implements OnInit {
 
     ngOnInit(): void {
         console.log("Init!")
+
+
+        var pokemonMapTemp: Record<number, Pokemon> = {}
+
         // IDEA: dig the API's docs to find if we can query directly all the pokemon with specific resource (types, weaknesses, etc)
         this.pokeService.getAllPokemons().subscribe((data) => {
             // console.log(data)
@@ -63,10 +67,13 @@ export class PokeSearchComponent implements OnInit {
                 });
 
                 var pokemonName = element.name.replace(/^\w/, (c: string) => c.toUpperCase());
-                this.pokemonMap[pokemon_index] =
+                pokemonMapTemp[pokemon_index] =
                     new Pokemon(pokemon_index, pokemonName, pokemon_types, [], element.url)
             });
         });
+
+        // force reload
+        this.pokemonMap = pokemonMapTemp;
     }
 
     go() {
