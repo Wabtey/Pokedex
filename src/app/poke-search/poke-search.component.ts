@@ -22,7 +22,8 @@ export class PokeSearchComponent implements OnInit {
      *   api url to query the pokemon,
      * ]
      */
-    pokemonMap: Record<number, Pokemon> = {}
+    pokemonMap: Map<number, Pokemon> = new Map<number, Pokemon>;
+    pokemonMapTrunk: Map<number, Pokemon> = new Map<number, Pokemon>;
 
     // Example: 
     /*
@@ -45,9 +46,6 @@ export class PokeSearchComponent implements OnInit {
     ngOnInit(): void {
         console.log("Init!")
 
-
-        var pokemonMapTemp: Record<number, Pokemon> = {}
-
         // IDEA: dig the API's docs to find if we can query directly all the pokemon with specific resource (types, weaknesses, etc)
         this.pokeService.getAllPokemons().subscribe((data) => {
             // console.log(data)
@@ -56,24 +54,35 @@ export class PokeSearchComponent implements OnInit {
                 var pokemon_index: number = index + 1;
                 var pokemon_types: PokemonType[] = [];
                 this.pokeService.getPokemon(element.url).subscribe((pokemon_resource) => {
-                    // if (index + 1 == 1195) {
-                    //     console.log(pokemon_resource)
-                    // }
-                    // pokemon_index = pokemon_resource.id;
-
                     pokemon_resource.types.forEach((types_element: PokemonTypeFromAPI, _) => {
                         pokemon_types.push(PokemonType[types_element.type.name as keyof typeof PokemonType])
                     })
-                });
 
-                var pokemonName = element.name.replace(/^\w/, (c: string) => c.toUpperCase());
-                pokemonMapTemp[pokemon_index] =
-                    new Pokemon(pokemon_index, pokemonName, pokemon_types, [], element.url)
+                    var pokemonName = element.name.replace(/^\w/, (c: string) => c.toUpperCase());
+                    this.pokemonMapTrunk.set(
+                        pokemon_index,
+                        new Pokemon(pokemon_index, pokemonName, pokemon_types, [], element.url)
+                    );
+
+                    if (index % 100 || index == data.count - 1) this.loadTrunkToMap();
+                });
             });
         });
+    }
 
-        // force reload
-        this.pokemonMap = pokemonMapTemp;
+    private loadTrunkToMap() {
+        // fix the async problem of unloading all pokemonTrunk while loading it with the subscribe forEach => getPokemon()
+        let pokemonMapTemp = this.pokemonMapTrunk;
+        // FIXME: some pokemon add between those two line could be lost...
+        this.pokemonMapTrunk.clear();
+
+        pokemonMapTemp.forEach((pokemon: Pokemon, index: number) => {
+            this.pokemonMap.set(index, pokemon);
+        });
+
+
+        // // force reload
+        // this.pokemonMap = this.pokemonMapTrunk;
     }
 
     go() {
