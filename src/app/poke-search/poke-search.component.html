@@ -1,5 +1,5 @@
 <p>
-    Search for a Pokémon by name or using their National Pokédex number. 
+    Search for a Pokémon by name or using their National Pokédex number.
 </p>
 
 <input [(ngModel)]="$id">
@@ -7,7 +7,8 @@
 <button (click)="clear()">Clear</button>
 
 <select name="Pokemon List" [(ngModel)]="$id">
-    <option *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:$id|sortPokemonByName">{{ item.value.name }}</option>
+    <option *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:$id|sortPokemonByName">{{ item.value.name }}
+    </option>
 </select>
 
 <!--
@@ -26,8 +27,21 @@
     -- Result --
 </p>
 
-<!-- TODO: feature - display sort option -->
+<p>Sort options:</p>
+<select name="Sort Option">
+    <option (click)="switchSorting('NumericalAscending')">Numeral Ascending</option>
+    <option (click)="switchSorting('NumericalDescending')">Numeral Descending</option>
+    <option (click)="switchSorting('AlphabeticAscending')">Alphabetic Ascending</option>
+    <option (click)="switchSorting('AlphabeticDescending')">Alphabetic Descending</option>
+</select>
 
-<li *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:selectedPokeId|sortPokemonById">
-    {{ item.key }} : {{ item.value.name }}, [{{ item.value.types }}], [{{ item.value.weaknessese }}], 
+<!-- <div class="fancy">Hi! I want to be fancy.</div> -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<li *ngFor="let item of pokemonMap|keyvalue|filterPokemonPipe:selectedPokeId|sortOption:sort_option">
+    <button class="w3-btn" onclick="clear()">
+        {{ item.key }} : {{ item.value.name }}, [{{ item.value.types }}], [{{ item.value.weaknessese }}],
+    </button>
 </li>

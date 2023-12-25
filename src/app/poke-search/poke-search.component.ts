@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { IPokemon, Pokemon, PokemonType, PokemonTypeFromAPI, default_pokemon_type } from '../pokemon';
 import { PokeApiService } from '../poke-api.service';
 
+export enum SortOption {
+    NumericalAscending,
+    NumericalDescending,
+    AlphabeticAscending,
+    AlphabeticDescending,
+}
+
 @Component({
     selector: 'app-poke-search',
     templateUrl: './poke-search.component.html',
@@ -11,6 +18,7 @@ import { PokeApiService } from '../poke-api.service';
 export class PokeSearchComponent implements OnInit {
     $id: string = '';
     selectedPokeId: string = '';
+    sort_option: SortOption = SortOption.NumericalAscending;
 
     /**
      * the key is their id -> value:
@@ -83,6 +91,10 @@ export class PokeSearchComponent implements OnInit {
     clear() {
         this.$id = ""
         this.go()
+    }
+
+    switchSorting(sort_option_string: String) {
+        this.sort_option = SortOption[sort_option_string as keyof typeof SortOption]
     }
 }
 

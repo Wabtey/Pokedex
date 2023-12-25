@@ -14,6 +14,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PokeApiService } from './poke-api.service';
 import { SortPokemonByNamePipe } from './sort-pokemon-by-name.pipe';
 import { SortPokemonByIdPipe } from './sort-pokemon-by-id.pipe';
+import { SortOptionPipe } from './sort-option.pipe';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { SortPokemonByIdPipe } from './sort-pokemon-by-id.pipe';
         PokeSearchComponent,
         FilterPokemonPipePipe,
         SortPokemonByNamePipe,
-        SortPokemonByIdPipe
+        SortPokemonByIdPipe,
+        SortOptionPipe
     ],
     imports: [
         FormsModule,
